@@ -167,7 +167,7 @@ class Nsga2
     calculate_objectives(pop, search_space)
     fast_nondominated_sort(pop)
     selected = Array.new(pop_size){better(pop[rand(pop_size)], pop[rand(pop_size)])}
-    children = reproduce(selected, pop_size, p_crossover)  
+    children = reproduce(selected, pop_size, p_cross)  
     calculate_objectives(children, search_space)    
     max_gens.times do |gen|  
       union = pop + children  
@@ -175,7 +175,7 @@ class Nsga2
       offspring = select_parents(fronts, pop_size)
       selected = Array.new(pop_size){better(offspring[rand(pop_size)], offspring[rand(pop_size)])}
       pop = children
-      children = reproduce(selected, pop_size, p_crossover)    
+      children = reproduce(selected, pop_size, p_cross)    
       calculate_objectives(children, search_space)
       best = children.sort!{|x,y| weighted_sum(x)<=>weighted_sum(y)}.first    
       best_s = "[x=#{best[:vector]}, objs=#{best[:objectives].join(', ')}]"
