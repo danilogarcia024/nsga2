@@ -1,6 +1,7 @@
 # q, c, g must be generated
 module Functions
   def objectives
+    [:sum_objective]
     [:objective_x, :objective_y, :objective_z]
   end
 
