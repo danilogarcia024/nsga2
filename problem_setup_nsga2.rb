@@ -3,6 +3,7 @@ require "./eval_context"
 require "./functions"
 require "./restrictions"
 require "./solutions"
+require "csv"
 
 context = EvalContext.new(Functions, Solutions, Restrictions)
 context.load_variables("info.json")
