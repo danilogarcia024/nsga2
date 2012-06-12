@@ -15,7 +15,7 @@ options = {
   :p_cross => 0.98
 }
 
-(10..10).each do |n|
+(10..13).each do |n|
   context.n = n
   nsga2_instance = Nsga2.new(context, options)
   nsga2_instance.search  

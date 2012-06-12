@@ -66,7 +66,7 @@ class Nsga2
       p[:objectives] = []
       context.generate_solution(p[:vector])
       context.objectives.each do |objective|
-      puts "#{objective}: #{context.public_send(objective)}"        
+      #puts "#{objective}: #{context.public_send(objective)}"        
       p[:objectives] << context.public_send(objective) if context.restrictions_meet?
       end
     end
@@ -167,8 +167,9 @@ class Nsga2
     calculate_objectives(pop, search_space)
     fast_nondominated_sort(pop)
     selected = Array.new(pop_size){better(pop[rand(pop_size)], pop[rand(pop_size)])}
-    children = reproduce(selected, pop_size, p_crossover)  
+    children = reproduce(selected, pop_size, p_cross)  
     calculate_objectives(children, search_space)    
+    csv = CSV.open("pareto"+context.n+".csv","wb")
     max_gens.times do |gen|  
       union = pop + children  
       fronts = fast_nondominated_sort(union)  
@@ -180,7 +181,9 @@ class Nsga2
       best = children.sort!{|x,y| weighted_sum(x)<=>weighted_sum(y)}.first    
       best_s = "[x=#{best[:vector]}, objs=#{best[:objectives].join(', ')}]"
       puts " > gen=#{gen+1}, fronts=#{fronts.length}, best=#{best_s}"
-    end  
+      csv << best[:objectives]
+    end
+    csv.close  
     return children
   end
 
