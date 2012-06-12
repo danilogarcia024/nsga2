@@ -9,7 +9,7 @@ context = EvalContext.new(Functions, Solutions, Restrictions)
 context.load_variables("info.json")
 options = {
   :problem_size => 1,
-  :search_space => Array.new(2) {|i| [1, 5]},
+  :search_space => Array.new(2) {|i| [0, 10]},
   :max_gens => 50,
   :pop_size => 100,
   :p_cross => 0.98
