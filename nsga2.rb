@@ -179,9 +179,15 @@ class Nsga2
       children = reproduce(selected, pop_size, p_cross)    
       calculate_objectives(children, search_space)
       best = children.sort!{|x,y| weighted_sum(x)<=>weighted_sum(y)}.first    
+      #p q
+      #p c
+      #p g      
       best_s = "[x=#{best[:vector]}, objs=#{best[:objectives].join(', ')}]"
       puts " > gen=#{gen+1}, fronts=#{fronts.length}, best=#{best_s}"
       csv << best[:objectives]
+      csv << context.g
+      csv << context.q
+      csv << context.c
     end
     csv.close  
     return children

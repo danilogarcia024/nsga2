@@ -169,7 +169,7 @@ class Nsga2
     selected = Array.new(pop_size){better(pop[rand(pop_size)], pop[rand(pop_size)])}
     children = reproduce(selected, pop_size, p_cross)  
     calculate_objectives(children, search_space)    
-    csv = CSV.open("pareto"+context.n+".csv","wb")
+    csv = CSV.open("pareto"+context.n.to_s+".csv","wb")
     max_gens.times do |gen|  
       union = pop + children  
       fronts = fast_nondominated_sort(union)  
@@ -179,9 +179,15 @@ class Nsga2
       children = reproduce(selected, pop_size, p_cross)    
       calculate_objectives(children, search_space)
       best = children.sort!{|x,y| weighted_sum(x)<=>weighted_sum(y)}.first    
+      p q
+      p c
+      p g      
       best_s = "[x=#{best[:vector]}, objs=#{best[:objectives].join(', ')}]"
       puts " > gen=#{gen+1}, fronts=#{fronts.length}, best=#{best_s}"
       csv << best[:objectives]
+      csv << context.g
+      #csv << context.q
+      csv << context.c
     end
     csv.close  
     return children
