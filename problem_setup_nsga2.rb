@@ -8,7 +8,7 @@ require "csv"
 context = EvalContext.new(Functions, Solutions, Restrictions)
 context.load_variables("info.json")
 options = {
-  :problem_size => 1,
+  :problem_size => 2,
   :search_space => Array.new(2) {|i| [0, 10]},
   :max_gens => 50,
   :pop_size => 100,

@@ -9,7 +9,7 @@ module Solutions
     @g = Array.new(i){ Array.new(n){ Array.new(m) } }
     @c = Array.new(i){ Array.new(n) }
     @q = Array.new(i){ Array.new(n) { Array.new(m) { Array.new(2) } } }
-    @g = Array.new(i){ Array.new(n) { Array.new(m) } }
+    #@g = Array.new(i){ Array.new(n) { Array.new(m) } }
 
     (0...i).each do |ic|
       c[ic][0] = ci[ic].to_f
