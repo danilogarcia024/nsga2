@@ -2,15 +2,14 @@ module Solutions
   # cpow: [1, 5]
   # gpow: [1, 5]
   def generate_solution(vector)
-    #p vector    
     cpow, gpow = vector
-    #cpow = cpow.to_i
-    #gpow = gpow.to_i
-    @g = Array.new(i){ Array.new(n){ Array.new(m) } }
+    cpow = 1/cpow.to_f if cpow < 0
+    gpow = 1/gpow.to_f if gpow < 0
+
+    @g = Array.new(i){ Array.new(n) { Array.new(m) } }
     @c = Array.new(i){ Array.new(n) }
-    @p = Array.new(i){ Array.new(n) }    
     @q = Array.new(i){ Array.new(n) { Array.new(m) { Array.new(2) } } }
-    #@g = Array.new(i){ Array.new(n) { Array.new(m) } }
+    @p = Array.new(i){ Array.new(n) }
 
     (0...i).each do |ic|
       c[ic][0] = ci[ic].to_f
@@ -48,12 +47,8 @@ module Solutions
       (1...n - 1).each do |j|
          c[ic][j] = c[ic][0] + (c[ic][n - 1] - c[ic][0]) * ((j/n.to_f) ** cpow)
          p[ic][j] = p[ic][0] + (p[ic][n - 1] - p[ic][0]) * ((j/n.to_f) ** cpow)
-         #p "ic=#{ic}"
-         #p "j=#{j}"
       end
     end
-
-    #p q
   end
 
   # num:  [10, 13]
@@ -79,5 +74,9 @@ module Solutions
 
   def g
     @g
+  end
+
+  def p
+    @p
   end
 end
