@@ -169,7 +169,7 @@ class Nsga2
     selected = Array.new(pop_size){better(pop[rand(pop_size)], pop[rand(pop_size)])}
     children = reproduce(selected, pop_size, p_cross)  
     calculate_objectives(children, search_space)    
-    csv = CSV.open("pareto"+context.n.to_s+".csv","wb")
+    #csv = CSV.open("pareto"+context.n.to_s+".csv","wb")
     max_gens.times do |gen|  
       union = pop + children  
       fronts = fast_nondominated_sort(union)  
@@ -181,33 +181,33 @@ class Nsga2
       best = children.sort!{|x,y| weighted_sum(x)<=>weighted_sum(y)}.first    
       best_s = "[x=#{best[:vector]}, objs=#{best[:objectives].join(', ')}]"
       puts " > gen=#{gen+1}, fronts=#{fronts.length}, best=#{best_s}"
-      csv << best[:objectives]
-      csv << ["g"]
-      context.g.each do |gi|
+      #csv << best[:objectives]
+      #csv << ["g"]
+      #context.g.each do |gi|
         #csv << gi
-        gi.each do |ex|
-          csv << ex
-        end
-      end      
-      #csv << context.g
-      csv << ["q"]      
-      #csv << context.q
-      context.q.each do |qi|
-        #csv << gi
-        qi.each do |ex|
-          ex.each do |exi|
-            csv << exi
-          end          
+        #gi.each do |ex|
           #csv << ex
-        end
-      end      
-      csv << ["c"]
-      context.c.each do |ci|
-        csv << ci
-      end
+        #end
+      #end      
+      #csv << context.g
+      #csv << ["q"]      
+      #csv << context.q
+      #context.q.each do |qi|
+        #csv << gi
+        #qi.each do |ex|
+          #ex.each do |exi|
+            #csv << exi
+          #end          
+          #csv << ex
+        #end
+      #end      
+      #csv << ["c"]
+      #context.c.each do |ci|
+      #  csv << ci
+      #end
       #csv << context.c
     end
-    csv.close  
+    #csv.close  
     return children
   end
 
